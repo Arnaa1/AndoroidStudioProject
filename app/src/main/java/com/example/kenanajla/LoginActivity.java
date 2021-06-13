@@ -43,6 +43,13 @@ public class LoginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        Bundle bundle=getIntent().getExtras();
+        if(bundle !=null){
+            if(bundle.getString("Some") !=null){
+                Toast.makeText(getApplicationContext(), "data:" + bundle.getString("some"), Toast.LENGTH_SHORT).show();
+            }
+        }
+
         txt_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

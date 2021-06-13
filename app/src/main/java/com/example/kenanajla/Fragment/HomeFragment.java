@@ -1,5 +1,6 @@
 package com.example.kenanajla.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.kenanajla.Adapter.PostAdapter;
+import com.example.kenanajla.LoginActivity;
 import com.example.kenanajla.Model.Post;
 import com.example.kenanajla.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +57,15 @@ public class HomeFragment extends Fragment {
         checkFollowing();
         readPosts();
 
+        Button btnOpen=(Button) view.findViewById(R.id.logout);
+        btnOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in=new Intent(getActivity(), LoginActivity.class);
+                in.putExtra("some", "some data");
+                startActivity(in);
+            }
+        });
 
 
         return view;
