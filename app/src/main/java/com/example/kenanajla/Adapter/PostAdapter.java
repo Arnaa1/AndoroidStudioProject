@@ -78,14 +78,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             image_profile = itemView.findViewById(R.id.image_profile);
             post_image = itemView.findViewById(R.id.post_image);
-            like = itemView.findViewById(R.id.like);
-            comment = itemView.findViewById(R.id.comment);
-            save = itemView.findViewById(R.id.save);
             username = itemView.findViewById(R.id.username);
             likes = itemView.findViewById(R.id.likes);
             publisher = itemView.findViewById(R.id.publisher);
             description = itemView.findViewById(R.id.description);
-            comments = itemView.findViewById(R.id.comments);
 
         }
     }
