@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "898184078708",
+    "project_id": "kenanajla-eac4f",
+    "storage_bucket": "kenanajla-eac4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898184078708:android:7517811fbed770ea77b821",
+        "android_client_info": {
+          "package_name": "com.example.kenanajla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898184078708-c89nskvv7aco9cs1jboejmfi4u23869n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrLBZpvRU5gQjUZoHI05C9t1EyEDh8Lc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898184078708-c89nskvv7aco9cs1jboejmfi4u23869n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
