@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.kenanajla.Adapter.PostAdapter;
 import com.example.kenanajla.Model.Post;
@@ -51,6 +52,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(postAdapter);
 
         checkFollowing();
+        readPosts();
+
+
 
         return view;
     }
@@ -69,7 +73,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     followingList.add(snapshot.getKey());
                 }
-                readPosts();
+//                readPosts();
             }
 
             @Override
@@ -82,11 +86,8 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-
-
     private void readPosts(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Post");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -94,11 +95,13 @@ public class HomeFragment extends Fragment {
                 postLists.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Post post = snapshot.getValue(Post.class);
-                    for (String id : followingList) {
-                        if (post.getPublisher().equals(id)){
+//                    for (String id : followingList) {
+//                        if (post.getPublisher().equals(id)){
+//                            postLists.add(post);
+//                        }
+//                    }
+
                             postLists.add(post);
-                        }
-                    }
                 }
 
                 postAdapter.notifyDataSetChanged();
@@ -114,8 +117,4 @@ public class HomeFragment extends Fragment {
 
 
     }
-
-
-
-
 }

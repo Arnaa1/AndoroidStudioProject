@@ -39,7 +39,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
-    ImageView image_profile, options;
+    ImageView image_profile;
     TextView post, followers, followings, fullname, bio, username;
     Button edit_profile;
 
@@ -64,8 +64,7 @@ public class ProfileFragment extends Fragment {
         profileid = prefs.getString("profileid", "none");
 
         image_profile = view.findViewById(R.id.image_profile);
-        //options = view.findViewById(R.id.options);
-        post = view.findViewById(R.id.post);
+        post = view.findViewById(R.id.posts);
         followers = view.findViewById(R.id.followers);
         followings = view.findViewById(R.id.followings);
         fullname = view.findViewById(R.id.fullname);
@@ -73,7 +72,7 @@ public class ProfileFragment extends Fragment {
         username = view.findViewById(R.id.username);
         edit_profile = view.findViewById(R.id.edit_profile);
         my_fotos = view.findViewById(R.id.my_fotos);
-        saved_fotos = view.findViewById(R.id.saved_fotos);
+
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -201,7 +200,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getNrPosts(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Post");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -213,7 +212,7 @@ public class ProfileFragment extends Fragment {
                     }
                 }
 
-//                post.setText("Posts"+i);
+                post.setText(String.valueOf(i));
             }
 
             @Override
@@ -224,7 +223,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void myFotos() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Post");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

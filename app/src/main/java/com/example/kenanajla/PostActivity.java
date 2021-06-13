@@ -7,13 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,22 +28,18 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class PostActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE_REQUEST = 22;
     Uri imageUri;
     String myUrl = "";
-
-    ImageView close, image_added;
-    Button post;
-    EditText description;
-
     StorageTask uploadTask;
     StorageReference storageReference;
 
+    ImageView close, image_added;
+    TextView post;
+    EditText description;
 
 
 
@@ -88,35 +81,12 @@ public class PostActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageUri = result.getUri();
-
-            image_added.setImageURI(imageUri);
-        } else {
-            Toast.makeText(this, "something gone wrong!", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(PostActivity.this, MainActivity.class));
-            finish();
-        }
-    }
-
-
     private  void uploadImage() {
-
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Posting");
+        progressDialog.show();
 
         if (imageUri != null) {
-            ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Posting...");
-            progressDialog.show();
-
             StorageReference filerefrence = storageReference.child(System.currentTimeMillis()
                     + "."+ getFileExtension(imageUri));
 
@@ -166,6 +136,23 @@ public class PostActivity extends AppCompatActivity {
             });
         } else {
             Toast.makeText(this, "No Image Selected!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            imageUri = result.getUri();
+
+            image_added.setImageURI(imageUri);
+        } else {
+            Toast.makeText(this, "something gone wrong!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(PostActivity.this, MainActivity.class));
+            finish();
         }
     }
 }
